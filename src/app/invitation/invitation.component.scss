@@ -1,0 +1,181 @@
+.invitation-shell {
+  font-family: 'Inter', 'Playfair Display', system-ui, -apple-system, sans-serif;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-invitation-bg);
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.invitation-card {
+  background: var(--color-card);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  width: min(520px, 100%);
+  box-shadow: var(--color-invitation-card-shadow);
+  border: 1px solid var(--color-invitation-border);
+  text-align: center;
+  min-height: 340px;
+  opacity: 0;
+  transform: translateY(18px);
+  box-sizing: border-box;
+  max-height: min(90vh, 600px);
+  overflow-y: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: opacity 0.4s ease, transform 0.4s ease, max-height 0.4s ease,
+    background 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  color: var(--color-text);
+}
+
+.greeting {
+  font-family: 'Playfair Display', 'Inter', serif;
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+  color: var(--color-text);
+}
+
+.invitation-card.is-loaded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.status-text {
+  margin-bottom: 1.5rem;
+}
+
+.status {
+  display: inline-flex;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.status--accepted {
+  background: var(--status-accepted-bg);
+  color: var(--status-accepted-text);
+}
+
+.status--pending {
+  background: var(--status-pending-bg);
+  color: var(--status-pending-text);
+}
+
+.status--rejected {
+  background: var(--status-rejected-bg);
+  color: var(--status-rejected-text);
+}
+
+.buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.buttons button {
+  flex: 1;
+  min-width: 120px;
+  border-radius: 999px;
+  padding: 0.75rem 1.25rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 8px 15px rgba(123, 93, 93, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.buttons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.buttons .primary {
+  background: var(--color-primary);
+  color: var(--color-button-text);
+}
+
+.buttons .primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(123, 93, 93, 0.45);
+}
+
+.buttons .secondary {
+  background: var(--color-card);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.buttons .tertiary {
+  background: var(--status-rejected-bg);
+  color: var(--status-rejected-text);
+}
+
+.hint {
+  color: var(--hint-color);
+  font-size: 0.9rem;
+}
+
+.muted {
+  color: var(--color-muted);
+  margin: 0;
+}
+
+.error,
+.success {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  margin: 0;
+}
+
+.error.visible {
+  background: var(--color-error-bg);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  color: var(--color-error);
+  margin-bottom: 1rem;
+  max-height: 80px;
+  opacity: 1;
+}
+
+.success.visible {
+  color: var(--status-accepted-text);
+  margin-bottom: 0.5rem;
+  max-height: 80px;
+  opacity: 1;
+}
+
+.toast {
+  position: fixed;
+  top: 4.5rem;
+  right: 1.5rem;
+  transform: translateY(-20px);
+  background: var(--color-toast-bg);
+  color: var(--color-toast-text);
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -1,0 +1,354 @@
+.home-shell {
+  font-family: 'Inter', 'Playfair Display', system-ui, -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  color: var(--color-text);
+}
+
+.hero {
+  background: var(--color-header-bg);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  color: var(--color-hero-text);
+  font-family: 'Playfair Display', 'Inter', serif;
+  letter-spacing: 0.02em;
+  box-shadow: var(--card-shadow, 0 1px 4px rgba(15, 15, 15, 0.1));
+}
+
+.invitation-table {
+  background: var(--color-card);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow, 0 1px 4px rgba(15, 15, 15, 0.1));
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.table-header h2 {
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+  font-family: 'Playfair Display', 'Inter', serif;
+  color: var(--color-text);
+}
+
+.table-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.8rem;
+  color: var(--color-hero-muted);
+}
+
+.search-field input {
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-search-border);
+  padding: 0.35rem 0.75rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  min-width: 220px;
+  background: var(--color-card);
+  color: var(--color-text);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: var(--color-primary);
+  color: var(--color-button-text);
+  padding: 0.45rem 1rem;
+  border-radius: 0.5rem;
+  transition: background 0.2s ease;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+button:hover:not(:disabled) {
+  background: var(--color-button-hover);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.refresh-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.95rem;
+}
+
+.refresh-icon {
+  display: inline-block;
+  width: 1.1em;
+  text-align: center;
+  aspect-ratio: 1;
+}
+
+.refresh-text {
+  display: inline-block;
+}
+
+.table-filters {
+  margin: 0 0 1rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  min-height: 240px;
+  transition: opacity 0.3s ease;
+}
+
+.table-wrapper.is-loading {
+  opacity: 0.6;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.95rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--color-table-bg);
+  color: var(--color-table-text);
+}
+
+th,
+td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--color-table-border);
+}
+
+.invitation-link a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.status {
+  display: inline-flex;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status--accepted {
+  background: var(--status-accepted-bg);
+  color: var(--status-accepted-text);
+}
+
+.status--pending {
+  background: var(--status-pending-bg);
+  color: var(--status-pending-text);
+}
+
+.status--rejected {
+  background: var(--status-rejected-bg);
+  color: var(--status-rejected-text);
+}
+
+.empty-row td {
+  text-align: center;
+  color: var(--color-muted);
+  padding: 2rem 0;
+  border-bottom: none;
+}
+
+.skeleton-row span {
+  display: block;
+  height: 0.9rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  background: var(--color-skeleton);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.muted {
+  color: var(--color-muted);
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.error {
+  color: var(--color-error);
+  margin: 0 0 1rem;
+}
+
+.pagination {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.pagination button {
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-primary);
+  padding: 0.4rem 0.9rem;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: #b0a2a2;
+}
+
+.bulk-invite {
+  background: var(--bulk-background);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: var(--card-shadow, 0 1px 4px rgba(15, 15, 15, 0.1));
+  border: 1px solid var(--bulk-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bulk-invite__header h3 {
+  margin: 0 0 0.25rem;
+  font-family: 'Playfair Display', 'Inter', serif;
+  color: var(--color-text);
+}
+
+.bulk-invite textarea {
+  border-radius: 0.6rem;
+  border: 1px solid var(--bulk-border);
+  padding: 0.75rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.95rem;
+  min-height: 120px;
+  resize: vertical;
+  background: var(--color-card);
+  color: var(--color-text);
+}
+
+.bulk-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bulk-actions .muted {
+  color: var(--hint-color);
+}
+
+.bulk-success {
+  color: var(--status-accepted-text);
+  margin: 0;
+  font-weight: 600;
+}
+
+.bulk-error {
+  color: var(--color-error);
+  margin: 0;
+}
+
+@media (max-width: 640px) {
+  .home-shell {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .table-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .refresh-btn {
+    border-radius: 50%;
+    padding: 0.45rem;
+  }
+
+  .refresh-text {
+    display: none;
+  }
+
+  .table-wrapper table,
+  .table-wrapper thead {
+    width: 100%;
+  }
+
+  .table-wrapper thead {
+    display: none;
+  }
+
+  .table-wrapper tbody tr {
+    display: block;
+    border: 1px solid var(--color-table-border);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    background: var(--color-card);
+  }
+
+  .table-wrapper tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .table-wrapper td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    padding: 0.4rem 0;
+  }
+
+  .table-wrapper td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--color-muted);
+    margin-right: 0.75rem;
+  }
+
+  .invitation-link {
+    justify-content: flex-end;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .table-filters {
+    margin-top: -0.25rem;
+  }
+}

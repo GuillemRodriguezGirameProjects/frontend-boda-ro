@@ -1,0 +1,54 @@
+<div class="invitation-shell">
+  <app-theme-toggle [floating]="true"></app-theme-toggle>
+  @let guest = user();
+  <div class="invitation-card" [class.is-loaded]="guest && !loading()">
+    @if (loading()) {
+      <p class="muted">Carregant la teva invitació…</p>
+    }
+
+    @let errorMessage = error();
+    <p class="error" [class.visible]="errorMessage">{{ errorMessage }}</p>
+
+    @if (guest && !loading()) {
+      <p class="greeting">Hola <strong>{{ guest.name }}</strong>,</p>
+      <p class="status-text">
+        <span [class]="statusClass(guest)">{{ statusLabel(guest) }}</span>
+      </p>
+
+      <div class="buttons">
+        <button
+          type="button"
+          class="primary"
+          (click)="updateStatus(true)"
+          [disabled]="updating() || guest.accepted === true"
+        >
+          Acceptar
+        </button>
+        <button
+          type="button"
+          class="secondary"
+          (click)="updateStatus(null)"
+          [disabled]="updating() || guest.accepted === null"
+        >
+          Pendent
+        </button>
+        <button
+          type="button"
+          class="tertiary"
+          (click)="updateStatus(false)"
+          [disabled]="updating() || guest.accepted === false"
+        >
+          Rebutjar
+        </button>
+      </div>
+
+      <p class="hint">
+        Si necessites canviar la teva resposta més endavant, pots tornar aquí tantes vegades com vulguis.
+      </p>
+    }
+  </div>
+
+  <div class="toast" [class.visible]="showToast()">
+    {{ toastMessage() }}
+  </div>
+</div>

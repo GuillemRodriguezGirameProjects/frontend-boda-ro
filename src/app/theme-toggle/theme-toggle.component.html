@@ -1,0 +1,14 @@
+<button
+  type="button"
+  class="theme-toggle"
+  [class.theme-toggle--floating]="floating"
+  (click)="toggleTheme()"
+  [attr.aria-pressed]="isDark()"
+>
+  <span class="theme-toggle__icon" aria-hidden="true">
+    {{ isDark() ?  '☀' : '☾' }}
+  </span>
+  <span class="theme-toggle__label">
+    {{ isDark() ? 'Mode clar' : 'Mode fosc' }}
+  </span>
+</button>

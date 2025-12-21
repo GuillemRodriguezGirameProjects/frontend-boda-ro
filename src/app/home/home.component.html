@@ -1,0 +1,115 @@
+<div class="home-shell">
+  <section class="bulk-invite">
+    <div class="bulk-invite__header">
+      <h3>Registrar convidats</h3>
+      <p class="muted">
+        Introdueix els noms separats per comes o per linies. El sistema generara un ID per a cada convidat i els marcara com a pendents, aixi nomes caldra enviar-los l'enllac d'invitacio.
+      </p>
+    </div>
+    <textarea
+      rows="4"
+      [value]="bulkInput()"
+      (input)="setBulkInput($any($event.target).value)"
+      placeholder="Ex: Lara Ortega
+Pau Rodriguez, Clara Suarez"
+    ></textarea>
+    <div class="bulk-actions">
+      <button
+        type="button"
+        class="primary"
+        (click)="submitBulkUsers()"
+        [disabled]="bulkSubmitting()"
+      >
+        Afegir convidats
+      </button>
+      <span class="muted">Els noms poden repetir-se si cal, seran pendents fins que responguin.</span>
+    </div>
+    @if (bulkMessage()) {
+    <p class="bulk-success">{{ bulkMessage() }}</p>
+    }
+    @if (bulkError()) {
+    <p class="bulk-error">{{ bulkError() }}</p>
+    }
+  </section>
+
+  <section class="invitation-table">
+    <div class="table-header">
+      <div>
+        <h2>Llista d'invitats</h2>
+        @if (!loading()) {
+        <p class="muted">Actualitzat fa uns segons</p>
+        }
+        @if (loading()) {
+        <p class="muted">Carregant convidats…</p>
+        }
+      </div>
+      <div class="table-actions">
+        <button type="button" class="refresh-btn" (click)="loadUsers()" [disabled]="loading()" aria-label="Actualitzar">
+          <span class="refresh-icon" aria-hidden="true">⟳</span>
+          <span class="refresh-text">Actualitzar</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="table-filters">
+      <label class="search-field">
+        <span>Cercar per nom</span>
+        <input type="search" [value]="searchName()" (input)="setSearch($any($event.target).value)" placeholder="Ex: Ana" />
+      </label>
+    </div>
+
+    @if (error()) {
+    <p class="error">{{ error() }}</p>
+    }
+
+    @let displayed = paginatedUsers();
+    <div class="table-wrapper" [class.is-loading]="loading() && !displayed.length">
+      <table>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Estat</th>
+            <th>Invitació</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (displayed.length) {
+          @for (guest of displayed; track guest.id) {
+          <tr>
+            <td [attr.data-label]="'Nom'">{{ guest.name }}</td>
+            <td [attr.data-label]="'Estat'"><span [class]="statusClass(guest)">{{ displayStatus(guest) }}</span></td>
+            <td class="invitation-link" [attr.data-label]="'Invitació'">
+              <a [href]="invitationUrl(guest.id)" (click)="$event.preventDefault(); navigateToInvitation(guest.id)">
+                Obrir invitació
+              </a>
+            </td>
+          </tr>
+          }
+          } @else {
+          @if (!loading()) {
+          <tr class="empty-row">
+            <td colspan="3">Encara no hi ha convidats registrats.</td>
+          </tr>
+          } @else {
+          @for (row of [1, 2, 3]; track row) {
+          <tr class="skeleton-row">
+            <td><span></span></td>
+            <td><span></span></td>
+            <td><span></span></td>
+          </tr>
+          }
+          }
+          }
+        </tbody>
+      </table>
+    </div>
+
+    @let current = currentPage();
+    @let total = totalPages();
+    <footer class="pagination">
+      <button type="button" (click)="changePage(-1)" [disabled]="current === 1">Anterior</button>
+      <p>Pàgina {{ current }} de {{ total }}</p>
+      <button type="button" (click)="changePage(1)" [disabled]="current === total">Següent</button>
+    </footer>
+  </section>
+</div>
